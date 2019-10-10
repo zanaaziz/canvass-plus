@@ -10,9 +10,12 @@ import {
     MatButtonModule
 } from "@angular/material";
 
+import { AuthComponent } from './routes/auth/auth.component';
+
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        AuthComponent
     ],
     imports: [
         BrowserModule,
