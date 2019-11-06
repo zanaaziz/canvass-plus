@@ -12,19 +12,37 @@ import {
     MatTabsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDividerModule
+    MatDividerModule,
+    MatBottomSheetModule,
+    MatSelectModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTooltipModule
 } from "@angular/material";
 
 import { AuthComponent } from './routes/auth/auth.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { HomeComponent, AddResidenceSheet } from './routes/home/home.component';
+import { LogsComponent } from './routes/logs/logs.component';
+import { CanvassersComponent } from './routes/canvassers/canvassers.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         AuthComponent,
         HeaderComponent,
-        FooterComponent
+        FooterComponent,
+        HomeComponent,
+        AddResidenceSheet,
+        LogsComponent,
+        CanvassersComponent
+    ],
+    entryComponents: [
+        AddResidenceSheet
     ],
     imports: [
         BrowserModule,
@@ -38,7 +56,15 @@ import { FooterComponent } from './footer/footer.component';
         MatTabsModule,
         MatFormFieldModule,
         MatInputModule,
-        MatDividerModule
+        MatDividerModule,
+        MatBottomSheetModule,
+        MatSelectModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatTooltipModule
     ],
     providers: [],
     bootstrap: [AppComponent]

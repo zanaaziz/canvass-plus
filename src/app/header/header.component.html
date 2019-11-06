@@ -1,0 +1,35 @@
+<mat-toolbar>
+	<button mat-flat-button [routerLink]="['/']" color="primary">Canvass&#43;</button>
+
+	<span class="fill-space"></span>
+
+    <button mat-button [routerLink]="['/']">
+        <mat-icon>map</mat-icon>
+        <span>Map</span>
+    </button>
+
+    <button mat-button [routerLink]="['/logs']" routerLinkActive="active">
+        <mat-icon>bookmarks</mat-icon>
+        <span>Logs</span>
+    </button>
+
+    <button mat-button [routerLink]="['/canvassers']" routerLinkActive="active">
+        <mat-icon>people</mat-icon>
+        <span>Canvassers</span>
+    </button>
+
+    <button mat-icon-button [matMenuTriggerFor]="moreMenu">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #moreMenu="matMenu">
+        <button mat-menu-item>
+            <mat-icon>create</mat-icon>
+            Edit profile
+        </button>
+
+        <button mat-menu-item [routerLink]="['/auth']">
+            <mat-icon>power_settings_new</mat-icon>
+            Logout
+        </button>
+    </mat-menu>
+</mat-toolbar>

@@ -1,0 +1,32 @@
+@import 'src/palette.scss';
+
+.mat-toolbar {
+	border-top: solid 0.2em $primary;
+	background-color: $white;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+}
+
+.fill-space {
+	flex: 1 1 auto;
+}
+
+button {
+    span {
+        margin-left: 0.25em;
+    }
+}
+
+button.active {
+    color: $primary;
+}
+
+.mat-menu-item.active {
+	color: $primary;
+
+	* {
+		color: $primary;
+	}
+}

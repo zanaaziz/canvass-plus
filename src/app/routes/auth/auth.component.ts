@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-auth',
@@ -11,7 +12,8 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 export class AuthComponent implements OnInit {
 
     constructor(
-        private titleService: Title
+        private titleService: Title,
+        private router: Router
     ) { }
 
     loginForm: FormGroup;
@@ -29,11 +31,11 @@ export class AuthComponent implements OnInit {
     }
     
     onLogin() {
-        console.log('Logging in...');
+        this.router.navigate(['/']);
     }
 
     onRegister() {
-        console.log('Registering...');
+        this.router.navigate(['/']);
     }
 
     ngOnInit() {
@@ -42,14 +44,14 @@ export class AuthComponent implements OnInit {
         
         // login form
         this.loginForm = new FormGroup({
-			loginUsername: new FormControl(null, [Validators.required]),
+			loginUsername: new FormControl(null, Validators.required),
 			loginPassword: new FormControl(null, Validators.required)
 		});
 
         // register form
 		this.registerForm = new FormGroup({
 			registerName: new FormControl(null, Validators.required),
-			registerUsername: new FormControl(null, [Validators.required]),
+			registerUsername: new FormControl(null, Validators.required),
 			registerPassword: new FormControl(null, Validators.required)
 		});
     }

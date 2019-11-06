@@ -1,0 +1,48 @@
+@import 'src/palette.scss';
+
+.mdc-layout-grid__cell--span-12:first-child {
+    margin-bottom: 2.5em;
+}
+
+.add-canvasser-btn {
+    width: 100%;
+    text-align: center;
+}
+
+.canvasser-form {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+.canvasser-form > * {
+    width: 100%;
+}
+
+.mat-divider {
+    margin-top: 1.5em;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+td, th {
+    width: 25%;
+}
+
+.mat-row:hover {
+    background-color: rgba(0, 0, 0, 0.025);
+}
+
+.positive {
+    color: $primary;
+}
+
+.negative {
+    color: $warn;
+}

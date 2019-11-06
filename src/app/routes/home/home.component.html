@@ -1,0 +1,30 @@
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2381.6947969856947!2d-6.24525018386621!3d53.34871937997963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670e8cd86e97e7%3A0x6d51b774ee7fa935!2sNational%20College%20of%20Ireland!5e0!3m2!1sen!2suk!4v1573070569420!5m2!1sen!2suk" style="border:0;" allowfullscreen=""></iframe>
+
+<button mat-fab color="primary" class="account-btn" [matMenuTriggerFor]="accountMenu">
+    <mat-icon>person</mat-icon>
+</button>
+<mat-menu #accountMenu="matMenu">
+    <button mat-menu-item [routerLink]="['/logs']">
+        <mat-icon>bookmarks</mat-icon>
+        Logs
+    </button>
+
+    <button mat-menu-item [routerLink]="['/canvassers']">
+        <mat-icon>people</mat-icon>
+        Canvassers
+    </button>
+
+    <button mat-menu-item [routerLink]="['.']">
+        <mat-icon>create</mat-icon>
+        Edit profile
+    </button>
+
+    <button mat-menu-item [routerLink]="['/auth']">
+        <mat-icon>power_settings_new</mat-icon>
+        Logout
+    </button>
+</mat-menu>
+
+<button mat-fab color="primary" class="add-btn" (click)="onAdd()">
+    <mat-icon>add</mat-icon>
+</button>
