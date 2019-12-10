@@ -1,35 +1,40 @@
-<mat-toolbar>
-	<button mat-flat-button [routerLink]="['/']" color="primary">Canvass&#43;</button>
+<mat-toolbar *ngIf="user !== undefined && user !== null">
+    <button mat-flat-button [routerLink]="['/']" color="primary">
+        Canvass&#43;
+    </button>
 
 	<span class="fill-space"></span>
 
-    <button mat-button [routerLink]="['/']">
+    <button mat-button [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>assignment</mat-icon>
+        <span *ngIf="!isMobile">Spreadsheet</span>
+    </button>
+
+    <button mat-button [routerLink]="['/map']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" disabled>
         <mat-icon>map</mat-icon>
-        <span>Map</span>
+        <span *ngIf="!isMobile">Map</span>
     </button>
 
-    <button mat-button [routerLink]="['/logs']" routerLinkActive="active">
-        <mat-icon>bookmarks</mat-icon>
-        <span>Logs</span>
-    </button>
-
-    <button mat-button [routerLink]="['/canvassers']" routerLinkActive="active">
-        <mat-icon>people</mat-icon>
-        <span>Canvassers</span>
-    </button>
-
-    <button mat-icon-button [matMenuTriggerFor]="moreMenu">
-        <mat-icon>more_vert</mat-icon>
+    <button mat-button [matMenuTriggerFor]="moreMenu" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *ngIf="user !== undefined">
+        <mat-icon>person</mat-icon>
+        <span *ngIf="!isMobile">{{ user['email'] }}</span>
     </button>
     <mat-menu #moreMenu="matMenu">
-        <button mat-menu-item>
-            <mat-icon>create</mat-icon>
-            Edit profile
+        <button mat-menu-item [routerLink]="['/profile']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" disabled>
+            <mat-icon>how_to_reg</mat-icon>
+            Profile
         </button>
 
-        <button mat-menu-item [routerLink]="['/auth']">
-            <mat-icon>power_settings_new</mat-icon>
+        <button mat-menu-item (click)="onLogout()">
+            <mat-icon>exit_to_app</mat-icon>
             Logout
         </button>
     </mat-menu>
+
+    &nbsp;
+
+    <button mat-flat-button color="primary" (click)="onAddResidence()">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span *ngIf="!isMobile">Add a new residence</span>
+    </button>
 </mat-toolbar>

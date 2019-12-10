@@ -117,11 +117,11 @@ const ADDRESS: string[] = [
 ];
 
 @Component({
-    selector: 'app-logs',
-    templateUrl: './logs.component.html',
-    styleUrls: ['./logs.component.scss']
+    selector: 'app-spreadsheet',
+    templateUrl: './spreadsheet.component.html',
+    styleUrls: ['./spreadsheet.component.scss']
 })
-export class LogsComponent implements OnInit {
+export class SpreadsheetComponent implements OnInit {
 
     constructor() {
         // Create users

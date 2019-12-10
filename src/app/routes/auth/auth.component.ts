@@ -2,6 +2,8 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { AuthService } from './auth.service';
+import { SnackService } from 'src/app/shared/snack.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +15,9 @@ export class AuthComponent implements OnInit {
 
     constructor(
         private titleService: Title,
-        private router: Router
+        private authService: AuthService,
+        private router: Router,
+        private snackService: SnackService
     ) { }
 
     loginForm: FormGroup;
@@ -31,11 +35,47 @@ export class AuthComponent implements OnInit {
     }
     
     onLogin() {
-        this.router.navigate(['/']);
+        this.authService.login(this.loginForm.get('loginEmail').value, this.loginForm.get('loginPassword').value)
+        .catch(
+            error => {
+                if (error['code'] !== undefined && error['code'] === 'auth/user-not-found') {
+                    this.snackService.open('No account was found with this email address.');
+
+                } else if (error['code'] !== undefined && error['code'] === 'auth/wrong-password') {
+                    this.snackService.open('Your password is incorrect.');
+                }
+            }
+        )
+        .then(
+            userCredential => {
+                if(userCredential !== undefined){
+                    this.snackService.open('Welcome back!');
+                    this.router.navigate(['/']);
+                }
+            }
+        );
     }
 
     onRegister() {
-        this.router.navigate(['/']);
+        this.authService.register(this.registerForm.get('registerName').value, this.registerForm.get('registerEmail').value, this.registerForm.get('registerPassword').value)
+        .catch(
+            error => {
+                if (error['code'] !== undefined && error['code'] === 'auth/weak-password') {
+                    this.snackService.open('You\'re password should at least 6 characters.');
+
+                } else if (error['code'] !== undefined && error['code'] === 'auth/email-already-in-use') {
+                    this.snackService.open('An account already exists with this email address.');
+                }
+            }
+        )
+        .then(
+            userCredential => {
+                if(userCredential !== undefined){
+                    this.snackService.open('Welcome aboard!');
+                    this.router.navigate(['/']);
+                }
+            }
+        );
     }
 
     ngOnInit() {
@@ -44,14 +84,14 @@ export class AuthComponent implements OnInit {
         
         // login form
         this.loginForm = new FormGroup({
-			loginUsername: new FormControl(null, Validators.required),
+			loginEmail: new FormControl(null, [Validators.required, Validators.email]),
 			loginPassword: new FormControl(null, Validators.required)
 		});
 
         // register form
 		this.registerForm = new FormGroup({
 			registerName: new FormControl(null, Validators.required),
-			registerUsername: new FormControl(null, Validators.required),
+			registerEmail: new FormControl(null, [Validators.required, Validators.email]),
 			registerPassword: new FormControl(null, Validators.required)
 		});
     }

@@ -1,26 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './routes/auth/auth.component';
-import { HomeComponent } from './routes/home/home.component';
-import { LogsComponent } from './routes/logs/logs.component';
-import { CanvassersComponent } from './routes/canvassers/canvassers.component';
+import { AuthGuard } from './routes/auth/auth.guard';
+import { SpreadsheetComponent } from './routes/spreadsheet/spreadsheet.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: HomeComponent
+        component: SpreadsheetComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'auth',
         component: AuthComponent
-    },
-    {
-        path: 'logs',
-        component: LogsComponent
-    },
-    {
-        path: 'canvassers',
-        component: CanvassersComponent
     }
 ];
 

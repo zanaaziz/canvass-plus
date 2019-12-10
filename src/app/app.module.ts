@@ -4,6 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import {
     MatIconModule,
@@ -23,12 +27,11 @@ import {
     MatTooltipModule
 } from "@angular/material";
 
+import { environment } from 'src/environments/environment';
 import { AuthComponent } from './routes/auth/auth.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent, AddResidenceSheet } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { HomeComponent, AddResidenceSheet } from './routes/home/home.component';
-import { LogsComponent } from './routes/logs/logs.component';
-import { CanvassersComponent } from './routes/canvassers/canvassers.component';
+import { SpreadsheetComponent } from './routes/spreadsheet/spreadsheet.component';
 
 @NgModule({
     declarations: [
@@ -36,15 +39,17 @@ import { CanvassersComponent } from './routes/canvassers/canvassers.component';
         AuthComponent,
         HeaderComponent,
         FooterComponent,
-        HomeComponent,
         AddResidenceSheet,
-        LogsComponent,
-        CanvassersComponent
+        SpreadsheetComponent
     ],
     entryComponents: [
         AddResidenceSheet
     ],
     imports: [
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
+        AngularFirestoreModule,
+        AngularFireStorageModule,
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,

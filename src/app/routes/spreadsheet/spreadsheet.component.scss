@@ -1,7 +1,7 @@
 @import 'src/palette.scss';
 
-.mdc-layout-grid__cell--span-12:first-child {
-    margin-bottom: 2.5em;
+.fas.fa-search, .fas.fa-times-circle {
+    color: $secondary;
 }
 
 table {

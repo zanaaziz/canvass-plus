@@ -30,3 +30,10 @@ button.active {
 		color: $primary;
 	}
 }
+
+@media (max-width: 840px) {
+	button {
+        min-width: 36px !important;
+        padding: 0 0.75em;
+	}
+}
