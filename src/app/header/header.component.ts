@@ -5,6 +5,7 @@ import { SnackService } from '../shared/snack.service';
 import { BreakpointObserverService } from '../shared/breakpoint-observer.service';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LocationService } from '../shared/location.service';
 
 @Component({
     selector: 'app-header',
@@ -62,9 +63,13 @@ export class HeaderComponent implements OnInit {
 })
 export class AddResidenceSheet implements OnInit {
     
-    constructor(private _bottomSheetRef: MatBottomSheetRef<AddResidenceSheet>) {}
+    constructor(
+        private _bottomSheetRef: MatBottomSheetRef<AddResidenceSheet>,
+        private locationService: LocationService
+    ) {}
 
     addResidenceForm: FormGroup;
+    loading: boolean = true;
 
     openLink(event: MouseEvent): void {
         this._bottomSheetRef.dismiss();
@@ -87,13 +92,23 @@ export class AddResidenceSheet implements OnInit {
             navigator.geolocation
             .getCurrentPosition(
                 (position: Position) => {
-                    this.addResidenceForm.get('address').setValue(position['coords']['latitude'] + ', ' + position['coords']['longitude']);
+                    this.locationService.reverseGeocode(position['coords']['latitude'], position['coords']['longitude'])
+                    .subscribe(
+                        res => {
+                            this.loading = false;
+                            this.addResidenceForm.get('address').setValue(res['results'][0]['formatted_address']);
+                        }
+                    );
+                },
+                (error: PositionError) => {
+                    this.loading = false;
+                    console.log(error);
                 }
             );
 
         } else {
-            console.error('Geolocation is not supported by this browser.');
-
+            this.loading = false;
+            console.log('Geolocation is not supported by this browser.');
         }
     }
 }

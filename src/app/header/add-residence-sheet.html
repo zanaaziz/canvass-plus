@@ -1,3 +1,4 @@
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
 <h1>Add a new Residence</h1>
 
 <form [formGroup]="addResidenceForm" (ngSubmit)="onSubmit()">
@@ -14,10 +15,10 @@
         </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="standard" hideRequiredMarker>
+    <mat-form-field appearance="standard" class="address" hideRequiredMarker>
         <mat-label>Address</mat-label>
         <input matInput required type="text" formControlName="address">
-
+        <mat-progress-spinner mode="indeterminate" diameter="20" *ngIf="loading"></mat-progress-spinner>
         <mat-error *ngIf="!addResidenceForm.get('address').valid">
             Address is required
         </mat-error>

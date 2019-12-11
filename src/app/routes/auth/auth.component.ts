@@ -22,6 +22,7 @@ export class AuthComponent implements OnInit {
 
     loginForm: FormGroup;
     registerForm: FormGroup;
+    loading: boolean;
     
     // reset form on tab change
 	onTabChange(event: EventEmitter<MatTabChangeEvent>) {
@@ -35,20 +36,27 @@ export class AuthComponent implements OnInit {
     }
     
     onLogin() {
+        this.loading = true;
+
         this.authService.login(this.loginForm.get('loginEmail').value, this.loginForm.get('loginPassword').value)
         .catch(
             error => {
+                this.loading = false;
+
                 if (error['code'] !== undefined && error['code'] === 'auth/user-not-found') {
                     this.snackService.open('No account was found with this email address.');
 
                 } else if (error['code'] !== undefined && error['code'] === 'auth/wrong-password') {
                     this.snackService.open('Your password is incorrect.');
+
                 }
             }
         )
         .then(
             userCredential => {
-                if(userCredential !== undefined){
+                if (userCredential !== undefined) {
+                    this.loading = false;
+                    
                     this.snackService.open('Welcome back!');
                     this.router.navigate(['/']);
                 }
@@ -57,20 +65,27 @@ export class AuthComponent implements OnInit {
     }
 
     onRegister() {
+        this.loading = true;
+
         this.authService.register(this.registerForm.get('registerName').value, this.registerForm.get('registerEmail').value, this.registerForm.get('registerPassword').value)
         .catch(
             error => {
+                this.loading = false;
+
                 if (error['code'] !== undefined && error['code'] === 'auth/weak-password') {
                     this.snackService.open('You\'re password should at least 6 characters.');
 
                 } else if (error['code'] !== undefined && error['code'] === 'auth/email-already-in-use') {
                     this.snackService.open('An account already exists with this email address.');
+
                 }
             }
         )
         .then(
             userCredential => {
                 if(userCredential !== undefined){
+                    this.loading = false;
+
                     this.snackService.open('Welcome aboard!');
                     this.router.navigate(['/']);
                 }

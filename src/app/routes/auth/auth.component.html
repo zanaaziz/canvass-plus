@@ -1,3 +1,6 @@
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+<div class="spinner" *ngIf="loading"><mat-progress-spinner mode="indeterminate"></mat-progress-spinner></div>
+
 <h1>Canvass&#43;</h1>
 
 <mat-tab-group mat-stretch-tabs dynamicHeight (selectedTabChange)="onTabChange($event)">

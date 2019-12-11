@@ -18,3 +18,13 @@ button {
     margin-top: 1em;
 	margin-bottom: 1em;
 }
+
+.address {
+    position: relative;
+
+    .mat-progress-spinner {
+        position: absolute;
+        right: 0;
+        bottom: 0.4em;
+    }
+}

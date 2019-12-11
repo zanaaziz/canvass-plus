@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Title } from '@angular/platform-browser';
 
 export interface UserData {
     id: string;
@@ -123,27 +124,26 @@ const ADDRESS: string[] = [
 })
 export class SpreadsheetComponent implements OnInit {
 
-    constructor() {
+    constructor(
+        private titleService: Title
+    ) {
         // Create users
         const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-        users.push({
-            id: '101',
-            address: 'Mayor Street Lower, IFSC, Dublin, Ireland.',
-            contact: '014498500',
-            status: 'Positive'
-        });
 
         // Assign the data to the data source for the table to render
         this.dataSource = new MatTableDataSource(users);
     }
 
-    displayedColumns: string[] = ['id', 'address', 'contact', 'status'];
+    displayedColumns: string[] = ['id', 'address', 'contact', 'status', 'actions'];
     dataSource: MatTableDataSource<UserData>;
+    loading: boolean;
 
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
     @ViewChild(MatSort, {static: true}) sort: MatSort;
 
     ngOnInit() {
+        this.titleService.setTitle('Spreadsheet | Canvass+');
+
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
     }

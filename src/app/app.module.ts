@@ -24,7 +24,9 @@ import {
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule
 } from "@angular/material";
 
 import { environment } from 'src/environments/environment';
@@ -32,6 +34,7 @@ import { AuthComponent } from './routes/auth/auth.component';
 import { HeaderComponent, AddResidenceSheet } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SpreadsheetComponent } from './routes/spreadsheet/spreadsheet.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -53,6 +56,7 @@ import { SpreadsheetComponent } from './routes/spreadsheet/spreadsheet.component
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
+        HttpClientModule,
         FormsModule,
 		ReactiveFormsModule,
         MatIconModule,
@@ -69,7 +73,9 @@ import { SpreadsheetComponent } from './routes/spreadsheet/spreadsheet.component
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule
     ],
     providers: [],
     bootstrap: [AppComponent]
