@@ -6,8 +6,8 @@
         <mat-label>Status</mat-label>
         <mat-select formControlName="status">
             <mat-option value="positive">Positive</mat-option>
-            <mat-option value="negative">Negative</mat-option>
             <mat-option value="neutral">Neutral</mat-option>
+            <mat-option value="negative">Negative</mat-option>
         </mat-select>
 
         <mat-error *ngIf="!addResidenceForm.get('status').valid">
