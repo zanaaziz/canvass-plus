@@ -28,7 +28,7 @@ export class SpreadsheetComponent implements OnInit {
     displayedColumns: string[] = ['address', 'contact', 'status', 'actions'];
     dataSource: MatTableDataSource<Residence>;
     residences: Residence[] = [];
-    loading: boolean;
+    loading: boolean = true;
 
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
     @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -73,7 +73,7 @@ export class SpreadsheetComponent implements OnInit {
                     item => {
                         return {
                             id: item.payload.doc.id,
-                            ...item.payload.doc.data()
+                            ...<Object>item.payload.doc.data()
                         } as Residence;
                     }
                 );
@@ -81,6 +81,8 @@ export class SpreadsheetComponent implements OnInit {
                 this.dataSource = new MatTableDataSource(this.residences);
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
+
+                this.loading = false
             }
         );
     }
