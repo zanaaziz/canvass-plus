@@ -44,10 +44,10 @@ export class AuthComponent implements OnInit {
                 this.loading = false;
 
                 if (error['code'] !== undefined && error['code'] === 'auth/user-not-found') {
-                    this.snackService.open('No account was found with this email address.');
+                    this.snackService.open('No account was found with this email address');
 
                 } else if (error['code'] !== undefined && error['code'] === 'auth/wrong-password') {
-                    this.snackService.open('Your password is incorrect.');
+                    this.snackService.open('Your password is incorrect');
 
                 }
             }
@@ -57,7 +57,7 @@ export class AuthComponent implements OnInit {
                 if (userCredential !== undefined) {
                     this.loading = false;
                     
-                    this.snackService.open('Welcome back!');
+                    this.snackService.open('Welcome back');
                     this.router.navigate(['/']);
                 }
             }
@@ -73,10 +73,10 @@ export class AuthComponent implements OnInit {
                 this.loading = false;
 
                 if (error['code'] !== undefined && error['code'] === 'auth/weak-password') {
-                    this.snackService.open('You\'re password should at least 6 characters.');
+                    this.snackService.open('You\'re password should at least 6 characters');
 
                 } else if (error['code'] !== undefined && error['code'] === 'auth/email-already-in-use') {
-                    this.snackService.open('An account already exists with this email address.');
+                    this.snackService.open('An account already exists with this email address');
 
                 }
             }
@@ -86,7 +86,7 @@ export class AuthComponent implements OnInit {
                 if(userCredential !== undefined){
                     this.loading = false;
 
-                    this.snackService.open('Welcome aboard!');
+                    this.snackService.open('Welcome aboard');
                     this.router.navigate(['/']);
                 }
             }

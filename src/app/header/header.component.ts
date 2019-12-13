@@ -6,6 +6,8 @@ import { BreakpointObserverService } from '../shared/breakpoint-observer.service
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LocationService } from '../shared/location.service';
+import { FirebaseService } from '../shared/firebase.service';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-header',
@@ -19,7 +21,8 @@ export class HeaderComponent implements OnInit {
         private authService: AuthService,
         private router: Router,
         private snackService: SnackService,
-        private breakpointObserverService: BreakpointObserverService
+        private breakpointObserverService: BreakpointObserverService,
+        private dialog: MatDialog
     ) { }
 
     user: firebase.User;
@@ -30,9 +33,19 @@ export class HeaderComponent implements OnInit {
     }
 
     onLogout(): void {
-        this.authService.logout();
-        this.snackService.open('Till next time!');
-        this.router.navigate(['/auth']);
+        const dialogRef = this.dialog.open(LogoutConfirmDialogModel, {
+			width: '250px',
+			height: '120px'
+		});
+
+		dialogRef.afterClosed()
+		.subscribe(result => {
+			if (result === true) {
+                this.authService.logout();
+                this.snackService.open('Till next time');
+                this.router.navigate(['/auth']);
+			}
+		});
     }
 
     ngOnInit() {
@@ -57,6 +70,27 @@ export class HeaderComponent implements OnInit {
 }
 
 @Component({
+	selector: 'confirm-dialog-model',
+	templateUrl: '../shared/confirm-dialog.html',
+})
+export class LogoutConfirmDialogModel {
+
+	constructor(public dialogRef: MatDialogRef<HeaderComponent>) { }
+
+	onYes() {
+		this.dialogRef.close(true);
+	}
+
+	onNo() {
+		this.dialogRef.close(false);
+	}
+
+	onClose() {
+		this.dialogRef.close(null);
+	}
+}
+
+@Component({
     selector: 'add-residence-sheet',
     templateUrl: 'add-residence-sheet.html',
     styleUrls: ['add-residence-sheet.scss']
@@ -65,7 +99,9 @@ export class AddResidenceSheet implements OnInit {
     
     constructor(
         private _bottomSheetRef: MatBottomSheetRef<AddResidenceSheet>,
-        private locationService: LocationService
+        private locationService: LocationService,
+        private firebaseService: FirebaseService,
+        private snackService: SnackService
     ) {}
 
     addResidenceForm: FormGroup;
@@ -77,6 +113,12 @@ export class AddResidenceSheet implements OnInit {
     }
 
     onSubmit(): void {
+        this.firebaseService.addResidence(this.addResidenceForm.value);
+
+        setTimeout(() => {
+            this.snackService.open('New residence added');
+        }, 500);
+
         this._bottomSheetRef.dismiss();
     }
 

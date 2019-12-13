@@ -1,7 +1,6 @@
-<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-<h1>Add a new Residence</h1>
+<h1>Edit this Residence</h1>
 
-<form [formGroup]="addResidenceForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="editResidenceForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="standard" hideRequiredMarker>
         <mat-label>Status</mat-label>
         <mat-select formControlName="status">
@@ -10,7 +9,7 @@
             <mat-option value="Negative">Negative</mat-option>
         </mat-select>
 
-        <mat-error *ngIf="!addResidenceForm.get('status').valid">
+        <mat-error *ngIf="!editResidenceForm.get('status').valid">
             Residence status is required
         </mat-error>
     </mat-form-field>
@@ -18,8 +17,7 @@
     <mat-form-field appearance="standard" class="address" hideRequiredMarker>
         <mat-label>Address</mat-label>
         <input matInput required type="text" formControlName="address">
-        <mat-progress-spinner mode="indeterminate" diameter="20" *ngIf="loading"></mat-progress-spinner>
-        <mat-error *ngIf="!addResidenceForm.get('address').valid">
+        <mat-error *ngIf="!editResidenceForm.get('address').valid">
             Address is required
         </mat-error>
     </mat-form-field>
@@ -29,5 +27,5 @@
         <input matInput type="tel" pattern="[0-9]{0,}" formControlName="contact">
     </mat-form-field>
 
-    <button mat-flat-button color="primary" type="submit" [disabled]="!addResidenceForm.valid">Submit</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="!editResidenceForm.valid || !editResidenceForm.dirty">Apply</button>
 </form>

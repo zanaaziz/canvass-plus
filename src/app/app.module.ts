@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import {
     MatIconModule,
@@ -26,14 +25,15 @@ import {
     MatSortModule,
     MatTooltipModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule
 } from "@angular/material";
 
 import { environment } from 'src/environments/environment';
 import { AuthComponent } from './routes/auth/auth.component';
-import { HeaderComponent, AddResidenceSheet } from './header/header.component';
+import { HeaderComponent, AddResidenceSheet, LogoutConfirmDialogModel } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { SpreadsheetComponent } from './routes/spreadsheet/spreadsheet.component';
+import { SpreadsheetComponent, EditResidenceSheet, DeleteConfirmDialogModel } from './routes/spreadsheet/spreadsheet.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -41,18 +41,23 @@ import { HttpClientModule } from '@angular/common/http';
         AppComponent,
         AuthComponent,
         HeaderComponent,
+        LogoutConfirmDialogModel,
         FooterComponent,
         AddResidenceSheet,
+        EditResidenceSheet,
+        DeleteConfirmDialogModel,
         SpreadsheetComponent
     ],
     entryComponents: [
-        AddResidenceSheet
+        AddResidenceSheet,
+        EditResidenceSheet,
+        DeleteConfirmDialogModel,
+        LogoutConfirmDialogModel
     ],
     imports: [
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
         AngularFirestoreModule,
-        AngularFireStorageModule,
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
@@ -75,7 +80,8 @@ import { HttpClientModule } from '@angular/common/http';
         MatSortModule,
         MatTooltipModule,
         MatProgressBarModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatDialogModule
     ],
     providers: [],
     bootstrap: [AppComponent]

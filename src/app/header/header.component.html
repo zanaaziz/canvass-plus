@@ -10,19 +10,14 @@
         <span *ngIf="!isMobile">Spreadsheet</span>
     </button>
 
-    <button mat-button [routerLink]="['/map']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" disabled>
-        <mat-icon>map</mat-icon>
-        <span *ngIf="!isMobile">Map</span>
-    </button>
-
     <button mat-button [matMenuTriggerFor]="moreMenu" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *ngIf="user !== undefined">
         <mat-icon>person</mat-icon>
-        <span *ngIf="!isMobile">{{ user['email'] }}</span>
+        <span *ngIf="!isMobile">Account</span>
     </button>
     <mat-menu #moreMenu="matMenu">
         <button mat-menu-item [routerLink]="['/profile']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" disabled>
-            <mat-icon>how_to_reg</mat-icon>
-            Profile
+            <mat-icon>verified_user</mat-icon>
+            {{ user['email'] }}
         </button>
 
         <button mat-menu-item (click)="onLogout()">
